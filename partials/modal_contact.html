@@ -1,0 +1,33 @@
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="contactModalLabel">Contact Us!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="send_email.php" method="post">
+          <div class="form-group">
+            <label for="customerEmail">Email address</label>
+            <input type="email" class="form-control" name="customerEmail" id="customerEmail" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="customerName">Name: </label>
+            <input type="text" class="form-control" name="customerName" id="customerName">
+          </div>
+          <div class="form-group">
+            <label for="customerMessage">Your Message: </label>
+            <textarea class="form-control" name="customerMessage" id="customerMessage" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p>We will contact you as soon as posible</p>
+      </div>
+    </div>
+  </div>
+</div>
