@@ -167,6 +167,17 @@ function login($pdo, $username, $password) {
     echo "BAd login query ". $e->getMessage();
   }
 }
+function findUser($pdo, $username) {
+  $sql = "SELECT * FROM admins WHERE username=:user";
+  try {
+    $statement = $pdo->prepare($sql);
+    $statement->execute(array(":user"=>$username));
+    // var_dump($statement);
+    return ($statement);
+  } catch(PDOException $e) {
+    echo "BAd login query ". $e->getMessage();
+  }
+}
 function adminIsLogged(){
   if (isset($_SESSION['admin_id']) || isset($_COOKIE['admin'])) return true;
 }

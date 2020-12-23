@@ -7,19 +7,23 @@ if(isset($_POST) && !empty($_POST)) {
   // var_dump($_POST);
   $user = $_POST['username'];
   $pass = $_POST['password'];
-  // echo "$user, $pass<br>";
-  $statement = login($pdo, $user,$pass);
+
+  // $statement = login($pdo, $user, $pass);
+  $statement = findUser($pdo,$user); // id, user and password
   $validUser = $statement->fetchAll(PDO::FETCH_ASSOC);
-  // echo "<pre>";
-  // var_dump($validUser);
-  // echo "<pre>";
-  if (count($validUser)==1) {
-    // echo "User ok";
-    $_SESSION['admin_id'] = $validUser[0]['admin_id'];
-    $_SESSION['username'] = $validUser[0]['username'];
-    if(isset($_POST['remember'])) {
-      //set 1 minute cookie
-      setcookie("admin",$validUser[0]['username'],time()+60);
+  echo "<pre>";
+  var_dump($validUser);
+  echo "<pre>";
+  if (count($validUser) == 1) {
+    echo "User exists";
+    if (password_verify($pass, $validUser[0]['password'])){ // password is ok
+      $_SESSION['admin_id'] = $validUser[0]['admin_id'];
+      $_SESSION['username'] = $validUser[0]['username'];
+      if(isset($_POST['remember'])) {
+        //set 1 hour cookie
+        setcookie("admin",$validUser[0]['username'],time()+3600);
+      }
+
     }
     // $_SESSION['admin_id'] = $validUser['admin_id'];
     // var_dump($_SESSION);

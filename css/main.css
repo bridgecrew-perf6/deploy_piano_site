@@ -1,20 +1,58 @@
 body {font-family: 'Lora',serif;}
   header {
-    background-image: url('../hero-bg.jpg');
+    background-color: rgba(0,0,0,0.7);
+    background-blend-mode: multiply;background-image: url('../hero-bg.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;
   }
-  nav { background: rgba(0,0,0,0.7); color:white;}
-  nav a.nav-link {color:white;}
-  .hero-heading {font-size: 48px;}
-  a.hero-cta { color:orangered;}
-  #about {
-    background-color: rgba(100,100,200,0.8);
-    /* background-image: url('../about-bg.jpg'); */
+  nav { background: rgba(0,0,0,0.7);
+    /* color:white; */
+  }
+  nav a.nav-link {
+    color:white;
+  }
+  nav a.nav-link:hover {
+    color: orangered;
+  }
+  .hero-heading {
+    font-size: 36px;
+    margin-top: 20vh;
+  }
+  a.hero-cta {
+    font-size: 26px;
+    color:orangered;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+  }
+  .about {
+    /* background-color: rgba(100,100,200,0.9); */
+    background-color: rgba(0,0,0,0.8);
+    background-image: url('../about-bg.jpg');
     background-blend-mode: multiply;
     background-size: cover;
     background-position: center;
     height: 100vh;
+    /* padding-top: 5vh; */
   }
   .copy-text {font-family: sans-serif;}
+  .footer {
+    /* min-height: 20vh; */
+    padding:0;
+  }
+  .footer-nav {
+    height: 100%;
+  }
+@media (min-width:540px) {
+  .hero-heading {
+    font-size: 48px;
+    margin-top: 25vh;
+  }
+  a.hero-cta {
+    /* font-size: 26px;
+    color:orangered;
+    background: rgba(0, 0, 0, 0.5);
+    */ width: 100%;
+    display: inline-block;
+  }
+}
