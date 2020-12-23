@@ -7,7 +7,6 @@ body {font-family: 'Lora',serif;}
     height: 100vh;
   }
   nav { background: rgba(0,0,0,0.7);
-    /* color:white; */
   }
   nav a.nav-link {
     color:white;
@@ -26,33 +25,29 @@ body {font-family: 'Lora',serif;}
     width: 100%;
   }
   .about {
-    /* background-color: rgba(100,100,200,0.9); */
     background-color: rgba(0,0,0,0.8);
     background-image: url('../about-bg.jpg');
     background-blend-mode: multiply;
     background-size: cover;
     background-position: center;
     height: 100vh;
-    /* padding-top: 5vh; */
+
   }
   .copy-text {font-family: sans-serif;}
   .footer {
-    /* min-height: 20vh; */
     padding:0;
   }
   .footer-nav {
     height: 100%;
   }
+
 @media (min-width:540px) {
   .hero-heading {
     font-size: 48px;
     margin-top: 25vh;
   }
-  a.hero-cta {
-    /* font-size: 26px;
-    color:orangered;
-    background: rgba(0, 0, 0, 0.5);
-    */ width: 100%;
+  a.hero-cta {  
+    width: 100%;
     display: inline-block;
   }
 }

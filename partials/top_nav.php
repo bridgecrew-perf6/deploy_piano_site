@@ -26,7 +26,6 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#contactModal">Contact</a>
-        <!-- <button type="button" class="nav-link" data-toggle="modal" data-target="#contactModal"> -->
       </li>
     </ul>
   </div>

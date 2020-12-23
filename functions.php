@@ -1,4 +1,12 @@
 <?php
+ /**
+ * Inserta un piano en tabla pianos, los datos vienen de $_POST
+ *
+ * @param $pdo   instancia de PDO
+ * @param $piano_img_path la ruta completa de la imagen
+ *
+ * @throws PDOException si no puede insertar el piano
+ */
 function insertPiano($pdo, $piano_img_path) {
  $sql = "INSERT INTO pianos
  (piano_id,model,name,description,in_stock,brand_id,type_id,img_url,video_url)
@@ -14,18 +22,23 @@ try {
       ':in_stock'=>true,
       ':brand_id'=>$_POST['brand_id'],
       ':type_id'=>$_POST['type_id'],
-      // ':img_url'=>$_POST['img_url'],
       ':img_url'=>$piano_img_path,
       ':video_url'=>$_POST['video_url']
     ));
     echo "data inserted OK";
-
-    // header('location:index.html');
     } catch(PDOException $e) {
         echo "BAD insertion ". $e->getMessage();
     }
 }
 
+/**
+* Actualiza un piano en tabla pianos, los datos vienen de $_POST
+*
+* @param $pdo   instancia de PDO
+* @param $piano_img_path la ruta completa de la imagen
+*
+* @throws PDOException si no puede actualizar el piano
+*/
 function updatePiano($pdo, $piano_img_path) {
   echo "piano_id=$_POST[piano_id]<br>";
  $sql = "UPDATE pianos SET
@@ -39,17 +52,13 @@ function updatePiano($pdo, $piano_img_path) {
          WHERE piano_id = :id
          ;";
 try {
-  // $statement = $pdo->prepare($sql, array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
-  // $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
   $statement = $pdo->prepare($sql);
   $statement->execute( array (
     ':model'=> $_POST['model'],
     ':name'=>$_POST['name'],
     ':description'=>$_POST['description'],
-    // ':in_stock'=>true,
     ':brand_id'=>$_POST['brand_id'],
     ':type_id'=>$_POST['type_id'],
-    // ':img_url'=>$_POST['img_url'],
     ':img_url'=>$piano_img_path,
     ':video_url'=>$_POST['video_url'],
     ':id'=>$_POST['piano_id']
@@ -62,6 +71,14 @@ try {
         echo "BAD insertion ". $e->getMessage();
     }
 }
+
+/**
+* Devuelve todos los pianos en un array asociativo
+*
+* @param $pdo   instancia de PDO
+*
+* @throws PDOException si no puede traer el piano
+*/
 function getPianos($pdo) {
   $sql = "SELECT * FROM pianos";
   try {
@@ -74,6 +91,14 @@ function getPianos($pdo) {
     echo "BAd getting " . $e->getMessage();
   }
 }
+
+/**
+* Devuelve todos los pianos de una marca en un array asociativo
+*
+* @param $pdo   instancia de PDO
+* @param $brand_id entero identificador de marca
+* @throws PDOException si no puede traer los pianos
+*/
 function getPianosByBrand($pdo,$brand_id) {
   $sql = "SELECT * FROM pianos WHERE brand_id=$brand_id";
   try {
@@ -86,6 +111,14 @@ function getPianosByBrand($pdo,$brand_id) {
     echo "BAd getting " . $e->getMessage();
   }
 }
+
+/**
+* Devuelve todos los pianos de un tipo en un array asociativo
+*
+* @param $pdo   instancia de PDO
+* @param $type_id entero identificador de tipo
+* @throws PDOException si no puede traer los pianos
+*/
 function getPianosByType($pdo,$type_id) {
   $sql = "SELECT * FROM pianos WHERE type_id=$type_id";
   try {
@@ -98,6 +131,14 @@ function getPianosByType($pdo,$type_id) {
     echo "BAd getting " . $e->getMessage();
   }
 }
+
+/**
+* Devuelve todos los datos de un piano en un array asociativo
+*
+* @param $pdo   instancia de PDO
+* @param $id entero identificador de piano
+* @throws PDOException si no puede traer los pianos
+*/
 function getPiano($pdo, $id) {
   $sql = "SELECT * FROM pianos WHERE piano_id=:id";
   try {
@@ -110,8 +151,13 @@ function getPiano($pdo, $id) {
     echo "BAd getting " . $e->getMessage();
   }
 }
-/*
 
+/**
+* Devuelve todos los pianos en un array asociativo que
+* trae las marcas y el tipo
+* @param $pdo   instancia de PDO
+*
+* @throws PDOException si no puede traer los pianos
 */
 function dataDashboardPiano($pdo){
   $sql = "SELECT
@@ -133,6 +179,13 @@ function dataDashboardPiano($pdo){
     echo "BAd getting " . $e->getMessage();
   }
 }
+
+/**
+* Devuelve todos las marcas en un array asociativo
+*
+* @param $pdo   instancia de PDO
+* @throws PDOException si no puede traer las marcas
+*/
 function getBrands($pdo) {
   $sql = "SELECT brand_id,name FROM brands;";
   try {
@@ -145,6 +198,13 @@ function getBrands($pdo) {
     echo "BAd getting " . $e->getMessage();
   }
 }
+
+/**
+* Borra un piano cuyo id es pasado por $_POST
+*
+* @param $pdo   instancia de PDO
+* @throws PDOException si no puede borrar el piano
+*/
 function deletePiano($pdo) {
   $sql = "DELETE  FROM pianos WHERE piano_id=:id;";
   try {
@@ -156,17 +216,24 @@ function deletePiano($pdo) {
   }
 }
 // ADMIN
-function login($pdo, $username, $password) {
-  $sql = "SELECT * FROM admins WHERE username=:user AND password=:pass";
-  try {
-    $statement = $pdo->prepare($sql);
-    $statement->execute(array(":user"=>$username,":pass"=>$password));
-    // var_dump($statement);
-    return ($statement);
-  } catch(PDOException $e) {
-    echo "BAd login query ". $e->getMessage();
-  }
-}
+// function login($pdo, $username, $password) {
+//   $sql = "SELECT * FROM admins WHERE username=:user AND password=:pass";
+//   try {
+//     $statement = $pdo->prepare($sql);
+//     $statement->execute(array(":user"=>$username,":pass"=>$password));
+//     // var_dump($statement);
+//     return ($statement);
+//   } catch(PDOException $e) {
+//     echo "BAd login query ". $e->getMessage();
+//   }
+// }
+/**
+* Busca un usuario (admin) en la tabla admins
+*
+* @param $pdo   instancia de PDO
+* @param $username el nombre de usuario a buscar
+* @throws PDOException si no puede traer al usuario
+*/
 function findUser($pdo, $username) {
   $sql = "SELECT * FROM admins WHERE username=:user";
   try {
@@ -178,19 +245,38 @@ function findUser($pdo, $username) {
     echo "BAd login query ". $e->getMessage();
   }
 }
+
+/**
+* Determina si el admin est logueado
+* @return true si lo esta, false caso contrario
+*/
 function adminIsLogged(){
   if (isset($_SESSION['admin_id']) || isset($_COOKIE['admin'])) return true;
+  else return false;
 }
+
+/**
+* Confirma que el admin este logueado, redirige a login si no lo esta
+*
+*/
 function confirmLogin() {
   if(!adminIsLogged()) {
-    // message with session
     header("location:login.php");
   }
 }
+
+/**
+* Redirige a una pagina pasado por parametro
+* @param $where a donde redirigir
+*/
 function redirectTo($where) {
   header("location:$where");
 }
 
+/**
+* Sube una image pasada por formulario, y la renombra
+* @return la ruta de la imagen
+*/
 function uploadImage() {
   $image_name=$_FILES['banner_image']['name'];
   $temp = explode(".", $image_name);

@@ -1,10 +1,17 @@
-console.log("is loading");
-// const submit = document.querySelector("#submit");
-const submit = document.querySelector("#form");
+// Capturar los elementos
+let form = document.querySelector("#form");
 const email = document.querySelector("#customerEmail");
 const name = document.querySelector("#customerName");
 const message = document.querySelector("#customerMessage");
-console.log(submit);
+// const errorMessages = document.querySelectorAll(".errorMessage");
+
+const errorEmail = document.querySelector("#errorEmail");
+const errorName = document.querySelector("#errorName");
+const errorText = document.querySelector("#errorText");
+
+//const messageSendAlert = document.querySelector("#messageSendAlert");
+
+// console.log(form);
 
 function validEmail(email)
 {
@@ -12,29 +19,29 @@ function validEmail(email)
 
   return re.test(email);
 }
-submit.addEventListener('click', function(e) {
-  // e.preventDefault();
-  console.log('no se envia pa');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
   let errors = [];
-  if (email.value=='') errors.push("email can't be empty");
-  if (!validEmail(email.value)) errors.push("provide a valid email");
-  if (name.value=='') errors.push("name can't be empty");
-  if (message.value=='') errors.push("Messge can't be empty");
+  // Poner los elementos con error en el array errors
+  if (email.value=='') errors.push(errorEmail);
+  if (!validEmail(email.value)) errors.push("invalid email");
+  if (name.value=='') errors.push(errorName);
+
+  if (message.value=='') errors.push(errorText);
 
   if (errors.length > 0) {
     let allErrors = ""
     for(let i =0; i< errors.length; i++) {
       allErrors += errors[i] + "\n ";
     }
-    alert( allErrors);
-    e.preventDefault();
+    // mostrar los errores en los campos que los posean
+    errors.forEach(error=>{ console.log(error.style="inline")}); 
     return false;
   }
   else {
-    // e.currentTarget.submit();
-    alert("Your message was successfuly sent");
-    console.log( 'deberia enviarlo');
-    // this.submit();
+  	// enviar el formulario
+    this.submit();
     return true;
   }
 

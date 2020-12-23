@@ -12,17 +12,20 @@
           <div class="form-group">
             <label for="customerEmail">Email address</label>
             <input type="email" class="form-control" name="customerEmail" id="customerEmail" aria-describedby="emailHelp">
+            <small style="display: none; border;1px solid red;" class="errorMessage" id="errorEmail">Please provide a valid email</small>
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <label for="customerName">Name: </label>
             <input type="text" class="form-control" name="customerName" id="customerName">
+            <small style="display: none;border;1px solid red;" class="errorMessage" id="errorName">Complete this field</small>
           </div>
           <div class="form-group">
             <label for="customerMessage">Your Message: </label>
             <textarea class="form-control" name="customerMessage" id="customerMessage" rows="3"></textarea>
+            <small style="display: none;border;1px solid red;" class="errorMessage" id="errorText">Complete this field</small>
           </div>
-          <button type="submit" class="btn btn-primary" id="submit">Send</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn" >Send</button>
         </form>
       </div>
       <div class="modal-footer">

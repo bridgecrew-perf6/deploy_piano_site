@@ -4,33 +4,34 @@ require_once('functions.php');
 require_once('session.php');
 if(isset($_POST) && !empty($_POST)) {
   $pdo = connectDB('piano_shop', 'admin', 'admin');
-  // var_dump($_POST);
+
   $user = $_POST['username'];
   $pass = $_POST['password'];
 
-  // $statement = login($pdo, $user, $pass);
+
   $statement = findUser($pdo,$user); // id, user and password
   $validUser = $statement->fetchAll(PDO::FETCH_ASSOC);
-  echo "<pre>";
-  var_dump($validUser);
-  echo "<pre>";
+
   if (count($validUser) == 1) {
-    echo "User exists";
     if (password_verify($pass, $validUser[0]['password'])){ // password is ok
       $_SESSION['admin_id'] = $validUser[0]['admin_id'];
       $_SESSION['username'] = $validUser[0]['username'];
       if(isset($_POST['remember'])) {
-        //set 1 hour cookie
-        setcookie("admin",$validUser[0]['username'],time()+3600);
+        //set 5 min cookie
+        setcookie("admin",$validUser[0]['username'],time()+300);
       }
 
+    } else { // password not OK
+      echo "<script> alert('invalid credentials!');</script>";
+      redirectTo("login.php");
     }
-    // $_SESSION['admin_id'] = $validUser['admin_id'];
-    // var_dump($_SESSION);
-    // header("location:index.php");
+
     redirectTo("admin.php");
   }
-  else { echo "invalid user<br>";}
+  else {
+    // echo "invalid user<br>";
+    echo "<script> alert('invalid credentials!');</script>";
+  }
 }
  ?>
 <!DOCTYPE html>
@@ -41,7 +42,7 @@ if(isset($_POST) && !empty($_POST)) {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Page Title - SB Admin</title>
+        <title>sFp Admin panel</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -57,8 +58,6 @@ if(isset($_POST) && !empty($_POST)) {
                                     <div class="card-body">
                                         <form action="login.php" method="post">
                                             <div class="form-group">
-                                                <!-- <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control py-4" id="inputEmailAddress" type="email" placeholder="Enter email address" /> -->
                                                 <label class="small mb-1" for="inputUser">user</label>
                                                 <input class="form-control py-4" id="inputUser" type="text" name="username" placeholder="Enter username" />
                                                 <div class="form-group">
@@ -73,14 +72,11 @@ if(isset($_POST) && !empty($_POST)) {
                                                 </div>
                                             </div>
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <!-- <a class="small" href="password.html">Forgot Password?</a> -->
-                                                <!-- <a class="btn btn-primary " href="index.html">Login</a> -->
                                                 <input type="submit" name="submit" class="btn btn-primary" value="Login">
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <!-- <div class="small"><a href="register.html">Need an account? Sign up!</a></div> -->
                                     </div>
                                 </div>
                             </div>

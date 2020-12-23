@@ -1,25 +1,26 @@
 <?php
-require_once('partials/head.php')
+require_once('partials/head.php');
  ?>
 <title>sFp Pianos</title>
 </head>
-<body>
+<body> 
   <?php require_once('partials/top_nav.php');?>
   <header class="container-fluid  align-items-center justify-content-center">
+      <?php 
+    require_once("session.php");
+    if (isset($_SESSION["contact"]) && !empty($_SESSION["contact"])) {
+        // echo "is set session";
+        include("partials/message_alert.html");
+        // limpiar la session
+        $_SESSION["contact"] = null;
+    }
+  ?>
     <div class="row">
       <div class="col-12 mt-5">
         <h1 class="text-center text-white pb-5 heading hero-heading">Find the piano of your dreams</h1>
       </div>
-      <!-- <div class="col-12 text-center">
-        <div class="">
-          <a href="" name="button" class="d-block h3 mb-5 hero-cta">Learn More</a>
-        </div>
-      </div> -->
     </div>
     <div class="row">
-      <!-- <div class="col-12 mt-5">
-        <h1 class="text-center text-white pb-5 heading hero-heading">Find the piano of your dreams</h1>
-      </div> -->
       <div class="col-4 offset-4 text-center">
           <a href="" name="cta" class="d-block h3 mb-5 hero-cta">Learn More</a>
       </div>

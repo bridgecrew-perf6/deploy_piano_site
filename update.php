@@ -42,14 +42,12 @@ $brands = getBrands($pdo);
               <div class="form-group">
                 <label for="img_url">img url</label>
                 <input type="file" name="banner_image" class="form-control-file">
-                <!-- <input type="text" class="form-control" name="img_url" id="img_url" value="$piano[0]['img_url'];"> -->
               </div>
               <div class="form-group">
                 <label for="video_url">video url</label>
                 <input type="text" class="form-control" name="video_url" id="video_url" value="<?=$piano[0]['video_url'];?>">
               </div>
             </div>
-            <!-- <div class="form-row"> -->
               <div class="form-row">
                 <div class="form-group">
                   <label for="brand">brand</label>
