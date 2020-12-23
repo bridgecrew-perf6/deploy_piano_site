@@ -3,8 +3,8 @@
  require_once('partials/head.php');
  require_once('conn.php');
  require_once("functions.php");
-
- $pdo = connectDB('piano_shop', 'admin', 'admin');
+ require_once("env.php");
+ $pdo = connectDB('piano_shop', $user, $password);
  echo "<div class='mt-5'></div>";
  if($_GET['type']) {
    if($_GET['type']==1 || $_GET['type']==2) { // valid type

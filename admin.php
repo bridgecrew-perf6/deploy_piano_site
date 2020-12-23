@@ -2,9 +2,10 @@
 require_once("conn.php");
 require_once("functions.php");
 require_once('session.php');
+require_once("env.php");
 confirmLogin();
 
-$pdo = connectDB('piano_shop', 'admin', 'admin');
+$pdo = connectDB('piano_shop', $user, $password);
 
 $pianos_data = dataDashboardPiano($pdo);
 $brands = getBrands($pdo);

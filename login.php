@@ -2,8 +2,9 @@
 require_once('conn.php');
 require_once('functions.php');
 require_once('session.php');
+require_once('env.php');
 if(isset($_POST) && !empty($_POST)) {
-  $pdo = connectDB('piano_shop', 'admin', 'admin');
+  $pdo = connectDB('piano_shop', $user, $password);
 
   $user = $_POST['username'];
   $pass = $_POST['password'];
@@ -12,7 +13,7 @@ if(isset($_POST) && !empty($_POST)) {
   $statement = findUser($pdo,$user); // id, user and password
   $validUser = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-  if (count($validUser) == 1) {
+  if (count($validUser) > 0) {
     if (password_verify($pass, $validUser[0]['password'])){ // password is ok
       $_SESSION['admin_id'] = $validUser[0]['admin_id'];
       $_SESSION['username'] = $validUser[0]['username'];
@@ -23,7 +24,7 @@ if(isset($_POST) && !empty($_POST)) {
 
     } else { // password not OK
       echo "<script> alert('invalid credentials!');</script>";
-      redirectTo("login.php");
+      //redirectTo("login.php");
     }
 
     redirectTo("admin.php");

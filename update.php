@@ -1,7 +1,8 @@
 <?php
 require_once('conn.php');
 require_once('functions.php');
-$pdo = connectDB('piano_shop', 'admin', 'admin');
+require_once('env.php');
+$pdo = connectDB('piano_shop',$user, $password);
 $piano = getPiano($pdo,$_GET['id']);
 $brands = getBrands($pdo);
  ?>
