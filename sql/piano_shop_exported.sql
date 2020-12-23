@@ -36,7 +36,7 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'pianoadmin','pianoadmin');
+INSERT INTO `admins` VALUES (1,'pianoadmin','$2y$10$9iWxre3.4ZF8kckXvEvTOulDvfSHy/qObfm18JW4yKdaHgESUoPBa');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
